@@ -3,12 +3,23 @@ kind: Application
 metadata:
   name: helm-secrets-test
 spec:
+  project: defaul
+  destination:
+    # cluster API URL
+    server: https://kubernetes.default.svc
+    # or cluster name
+    # name: in-cluster
+    # The namespace will only be set for namespace-scoped resources that have not set a value for .metadata.namespace
+    namespace: guestbook
   source:
+    repoURL: https://github.com/zbitname/argocd-secrets-test.git
+    targetRevision: HEAD
+    path: helm-secrets
     helm:
       valueFiles:
         # - secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml
         # - secrets+gpg-import-kubernetes://argocd/helm-secrets-private-keys#key.asc?secrets.yaml
-        - secrets://secret.yaml
+        - secrets://secret.enc.yaml
       # fileParameters (--set-file) are supported, too.
       # fileParameters:
       #   - name: config
