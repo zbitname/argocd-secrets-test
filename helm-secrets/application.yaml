@@ -6,13 +6,13 @@ spec:
   source:
     helm:
       valueFiles:
-        - secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml
-        - secrets+gpg-import-kubernetes://argocd/helm-secrets-private-keys#key.asc?secrets.yaml
-        - secrets://secrets.yaml
+        # - secrets+gpg-import:///helm-secrets-private-keys/key.asc?secrets.yaml
+        # - secrets+gpg-import-kubernetes://argocd/helm-secrets-private-keys#key.asc?secrets.yaml
+        - secrets://secret.yaml
       # fileParameters (--set-file) are supported, too.
-      fileParameters:
-        - name: config
-          path: secrets://secrets.yaml
-        # directly reference values from Cloud Providers
-        - name: mysql.rootPassword
-          path: secrets+literal://ref+azurekeyvault://my-vault/secret-a
+      # fileParameters:
+      #   - name: config
+      #     path: secrets://secret.yaml
+      #   # directly reference values from Cloud Providers
+      #   - name: mysql.rootPassword
+      #     path: secrets+literal://ref+azurekeyvault://my-vault/secret-a

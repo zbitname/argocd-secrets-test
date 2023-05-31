@@ -46,7 +46,7 @@ data:
   foo: bar
 EOF
 
-sops --encrypt ./secret.yaml > ./secret.enc.yaml
+sops -e --encrypted-regex '^(data|stringData)$' ./secret.yaml > ./secret.enc.yaml
 sops -d ./secret.enc.yaml
 ```
 
