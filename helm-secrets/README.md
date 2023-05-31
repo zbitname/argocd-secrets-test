@@ -29,3 +29,26 @@ kubectl -n argocd create secret generic helm-secrets-private-keys --from-file=ke
 
 kubectl -n argocd apply -k ../argocd/
 ```
+
+# Install SOPS
+https://github.com/mozilla/sops#stable-release
+
+# Using SOPS
+```
+export SOPS_PGP_FP="<key-id>"
+
+cat <<EOF > secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret
+data:
+  foo: bar
+EOF
+
+sops --encrypt ./secret.yaml > ./secret.enc.yaml
+sops -d ./secret.enc.yaml
+```
+
+# Using SOPS with ArgoCD
+TODO
